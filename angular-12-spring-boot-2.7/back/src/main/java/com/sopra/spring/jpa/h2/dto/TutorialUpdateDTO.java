@@ -15,9 +15,11 @@ import java.io.Serializable;
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
-public class TutorialSaveDTO implements Serializable {
+public class TutorialUpdateDTO implements Serializable {
 
     private String title;
 
     private String description;
+
+    private boolean published;
 }

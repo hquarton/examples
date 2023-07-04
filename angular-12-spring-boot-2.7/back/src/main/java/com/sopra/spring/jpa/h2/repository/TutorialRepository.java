@@ -1,12 +1,12 @@
 package com.sopra.spring.jpa.h2.repository;
 
-import java.util.List;
-
 import com.sopra.spring.jpa.h2.model.Tutorial;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface TutorialRepository extends JpaRepository<Tutorial, Long> {
-  List<Tutorial> findByPublished(boolean published);
+import java.util.Collection;
 
-  List<Tutorial> findByTitleContaining(String title);
+public interface TutorialRepository extends JpaRepository<Tutorial, Long> {
+    Collection<Tutorial> findByPublished(boolean published);
+
+    Collection<Tutorial> findByTitleContaining(String title);
 }
