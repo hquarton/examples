@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -42,6 +42,31 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.junit.jupiter</groupId>
+					<artifactId>junit-jupiter-engine</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.junit.vintage</groupId>
+					<artifactId>junit-vintage-engine</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.platform</groupId>
+			<artifactId>junit-platform-launcher</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.vintage</groupId>
+			<artifactId>junit-vintage-engine</artifactId>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -69,7 +94,17 @@
 			<optional>true</optional>
 		</dependency>
 	</dependencies>
-
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.junit</groupId>
+				<artifactId>junit-bom</artifactId>
+				<version>5.10.1</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 	<build>
 		<plugins>
 			<plugin>
@@ -147,6 +182,60 @@
 					</compilerArgs>
 					<source>11</source>
 					<target>11</target>
+				</configuration>
+			</plugin>
+			<!-- PITEST -->
+			<plugin>
+				<groupId>org.pitest</groupId>
+				<artifactId>pitest-maven</artifactId>
+				<version>1.14.2</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.pitest</groupId>
+						<artifactId>pitest-junit5-plugin</artifactId>
+						<version>1.2.0</version>
+					</dependency>
+				</dependencies>
+				<configuration>
+					<mutators>
+						<!-- CF https://pitest.org/quickstart/mutators/ -->
+						<!-- Default Mutators -->
+						<mutator>CONDITIONALS_BOUNDARY</mutator>
+						<mutator>INCREMENTS</mutator>
+						<mutator>INVERT_NEGS</mutator>
+						<mutator>MATH</mutator>
+						<mutator>NEGATE_CONDITIONALS</mutator>
+						<mutator>VOID_METHOD_CALLS</mutator>
+						<mutator>EMPTY_RETURNS</mutator>
+						<mutator>FALSE_RETURNS</mutator>
+						<mutator>TRUE_RETURNS</mutator>
+						<mutator>NULL_RETURNS</mutator>
+						<mutator>PRIMITIVE_RETURNS</mutator>
+						<mutator>REMOVE_CONDITIONALS_EQUAL_IF</mutator>
+						<mutator>REMOVE_CONDITIONALS_EQUAL_ELSE</mutator>
+						<mutator>REMOVE_CONDITIONALS_ORDER_IF</mutator>
+						<mutator>REMOVE_CONDITIONALS_ORDER_ELSE</mutator>
+						<!-- Optional Mutators -->
+						<mutator>CONSTRUCTOR_CALLS</mutator>
+						<mutator>INLINE_CONSTS</mutator>
+						<mutator>NON_VOID_METHOD_CALLS</mutator>
+						<mutator>REMOVE_CONDITIONALS</mutator>
+						<mutator>REMOVE_INCREMENTS</mutator>
+						<!-- Experimental Mutators -->
+						<mutator>EXPERIMENTAL_ARGUMENT_PROPAGATION</mutator>
+						<mutator>EXPERIMENTAL_BIG_DECIMAL</mutator>
+						<mutator>EXPERIMENTAL_BIG_INTEGER</mutator>
+						<mutator>EXPERIMENTAL_MEMBER_VARIABLE</mutator>
+						<mutator>EXPERIMENTAL_SWITCH</mutator>
+						<mutator>EXPERIMENTAL_NAKED_RECEIVER</mutator>
+					</mutators>
+                    <!-- On inclut que les tests métier-->
+                    <targetClasses>
+                        <param>com.sopra.spring.jpa.h2.service.*</param>
+                    </targetClasses>
+                    <targetTests>
+                        <param>com.sopra.spring.jpa.h2.service.impl.*Test</param>
+                    </targetTests>
 				</configuration>
 			</plugin>
 		</plugins>
