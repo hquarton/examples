@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:8081")
@@ -33,16 +32,12 @@ public class TutorialController {
 
     @GetMapping("/tutorials")
     public ResponseEntity<Collection<TutorialDTO>> getAllTutorials(@RequestParam(required = false) String title) {
-        try {
-            List<TutorialDTO> tutorials = new ArrayList<>(this.tutorialService.getAllTutorials(title));
+        List<TutorialDTO> tutorials = new ArrayList<>(this.tutorialService.getAllTutorials(title));
 
-            if (tutorials.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-            return new ResponseEntity<>(tutorials, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(Collections.emptyList(), HttpStatus.INTERNAL_SERVER_ERROR);
+        if (tutorials.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
+        return new ResponseEntity<>(tutorials, HttpStatus.OK);
     }
 
     @GetMapping("/tutorials/{id}")
@@ -56,12 +51,8 @@ public class TutorialController {
 
     @PostMapping("/tutorials")
     public ResponseEntity<TutorialDTO> createTutorial(@RequestBody TutorialSaveDTO tutorialSaveDTO) {
-        try {
-            TutorialDTO tutorial = this.tutorialService.createTutorial(tutorialSaveDTO);
-            return new ResponseEntity<>(tutorial, HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        TutorialDTO tutorial = this.tutorialService.createTutorial(tutorialSaveDTO);
+        return new ResponseEntity<>(tutorial, HttpStatus.CREATED);
     }
 
     @PutMapping("/tutorials/{id}")
@@ -76,36 +67,23 @@ public class TutorialController {
 
     @DeleteMapping("/tutorials/{id}")
     public ResponseEntity<HttpStatus> deleteTutorial(@PathVariable("id") long id) {
-        try {
-            this.tutorialService.deleteById(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        this.tutorialService.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping("/tutorials")
     public ResponseEntity<HttpStatus> deleteAllTutorials() {
-        try {
-            this.tutorialService.deleteAll();
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        this.tutorialService.deleteAll();
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/tutorials/published")
     public ResponseEntity<Collection<TutorialDTO>> findByPublished() {
-        try {
-            List<TutorialDTO> tutorials = new ArrayList<>(this.tutorialService.findByPublished());
+        List<TutorialDTO> tutorials = new ArrayList<>(this.tutorialService.findByPublished());
 
-            if (tutorials.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-            return new ResponseEntity<>(tutorials, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        if (tutorials.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
+        return new ResponseEntity<>(tutorials, HttpStatus.OK);
     }
-
 }
