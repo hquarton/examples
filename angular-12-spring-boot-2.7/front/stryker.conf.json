@@ -1,0 +1,32 @@
+{
+  "$schema": "./node_modules/@stryker-mutator/core/schema/stryker-schema.json",
+  "_comment": "This config was generated using 'stryker init'. Please see the guide for more information: https://stryker-mutator.io/docs/stryker-js/guides/angular",
+  "cleanTempDir": true,
+  "packageManager": "npm",
+  "mutate": [
+    "src/**/*.ts",
+    "!src/**/*.spec.ts",
+    "!src/**/*.css",
+    "!src/test.ts",
+    "!src/environments/*.ts"
+  ],
+  "testRunner": "jest",
+  "jest": {
+    "projectType": "custom",
+    "configFile": "jest.config.js",
+    "enableFindRelatedTests" : false
+  },
+  "reporters": [
+    "progress",
+    "clear-text",
+    "html"
+  ],
+  "concurrency": 4,
+  "concurrency_comment": "Recommended to use about half of your available cores when running stryker with angular",
+  "coverageAnalysis": "perTest",
+  "typescriptChecker": {
+    "prioritizePerformanceOverAccuracy": true
+  },
+  "disableTypeChecks": "src/app/**/*.{js,ts,jsx,tsx,html,vue,cts,mts,css}",
+  "tsconfigFile": "tsconfig.json"
+}

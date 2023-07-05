@@ -6,7 +6,8 @@
     "start": "ng serve --port 8081",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "jest"
+    "test": "jest",
+    "stryker": "stryker run"
   },
   "private": true,
   "dependencies": {
@@ -27,10 +28,19 @@
     "@angular-devkit/build-angular": "~12.0.2",
     "@angular/cli": "~12.0.2",
     "@angular/compiler-cli": "~12.0.2",
+    "@stryker-mutator/core": "^7.1.0",
+    "@stryker-mutator/html-reporter": "^3.1.0",
+    "@stryker-mutator/jest-runner": "^7.1.0",
+    "@stryker-mutator/karma-runner": "^8.2.3",
+    "@stryker-mutator/typescript-checker": "^7.1.0",
     "@types/jest": "^27.5.2",
     "@types/node": "^12.11.1",
     "jest": "^27.5.1",
+    "jest-environment-node": "^29.6.0",
     "jest-preset-angular": "^11.1.2",
+    "stryker": "^0.35.1",
+    "stryker-api": "^0.24.1",
+    "stryker-jest-runner": "^1.4.1",
     "typescript": "~4.2.3"
   }
 }
