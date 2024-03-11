@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 @Getter
@@ -19,7 +20,9 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class TutorialSaveDTO implements Serializable {
 
+    @NotBlank(message = "Title is mandatory")
     private String title;
 
+    @NotBlank(message = "Description is mandatory")
     private String description;
 }
