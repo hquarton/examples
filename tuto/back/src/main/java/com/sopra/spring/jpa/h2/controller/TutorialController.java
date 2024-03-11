@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -50,7 +51,7 @@ public class TutorialController {
     }
 
     @PostMapping("/tutorials")
-    public ResponseEntity<TutorialDTO> createTutorial(@RequestBody TutorialSaveDTO tutorialSaveDTO) {
+    public ResponseEntity<TutorialDTO> createTutorial(@Valid @RequestBody TutorialSaveDTO tutorialSaveDTO) {
         TutorialDTO tutorial = this.tutorialService.createTutorial(tutorialSaveDTO);
         return new ResponseEntity<>(tutorial, HttpStatus.CREATED);
     }

@@ -72,6 +72,16 @@ class TutorialControllerTest {
     }
 
     @Test
+    void testSaveTutorial_whenNoDatas() throws Exception {
+        TutorialSaveDTO tutorialSaveDTO = TestTools.getTutorialSaveDTOs();
+        tutorialSaveDTO.setDescription("");
+        String jsonRequestContent = new ObjectMapper().writeValueAsString(tutorialSaveDTO);
+        this.mockMvc.perform(post(SERVICE_URI).contentType(MediaType.APPLICATION_JSON).content(jsonRequestContent))
+                .andExpect(status().isBadRequest())
+        ;
+    }
+
+    @Test
     void testGetTutorialPublished_whenNoDatasPublished() throws Exception {
         this.mockMvc.perform(get(SERVICE_URI + "published").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
