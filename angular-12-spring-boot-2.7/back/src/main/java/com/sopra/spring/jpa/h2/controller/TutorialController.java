@@ -4,7 +4,7 @@ import com.sopra.spring.jpa.h2.dto.TutorialDTO;
 import com.sopra.spring.jpa.h2.dto.TutorialSaveDTO;
 import com.sopra.spring.jpa.h2.dto.TutorialUpdateDTO;
 import com.sopra.spring.jpa.h2.service.TutorialService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -25,10 +25,10 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping("/api")
+@RequiredArgsConstructor
 public class TutorialController {
 
-    @Autowired
-    private TutorialService tutorialService;
+    private final TutorialService tutorialService;
 
     @GetMapping("/tutorials")
     public ResponseEntity<Collection<TutorialDTO>> getAllTutorials(@RequestParam(required = false) String title) {

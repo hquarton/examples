@@ -7,13 +7,11 @@ import com.sopra.spring.jpa.h2.mapper.TutorialMapper;
 import com.sopra.spring.jpa.h2.model.Tutorial;
 import com.sopra.spring.jpa.h2.repository.TutorialRepository;
 import com.sopra.spring.jpa.h2.service.TutorialService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
-import org.springframework.validation.annotation.Validated;
 
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -21,14 +19,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Validated
+@RequiredArgsConstructor
 public class TutorialServiceImpl implements TutorialService {
 
-    @Autowired
-    private TutorialRepository tutorialRepository;
+    private final TutorialRepository tutorialRepository;
 
-    @Autowired
-    private TutorialMapper tutorialMapper;
+    private final TutorialMapper tutorialMapper;
 
     @Override
     public Collection<TutorialDTO> getAllTutorials(String title) {
@@ -50,7 +46,7 @@ public class TutorialServiceImpl implements TutorialService {
     }
 
     @Override
-    public TutorialDTO createTutorial(@Validated @NotNull TutorialSaveDTO tutorialSaveDTO) {
+    public TutorialDTO createTutorial(TutorialSaveDTO tutorialSaveDTO) {
         return this.tutorialMapper.tutorialToTutorialDto(this.tutorialRepository
                 .save(new Tutorial(tutorialSaveDTO.getTitle(), tutorialSaveDTO.getDescription(), false)));
     }

@@ -3,9 +3,7 @@ package com.sopra.spring.jpa.h2.service;
 import com.sopra.spring.jpa.h2.dto.TutorialDTO;
 import com.sopra.spring.jpa.h2.dto.TutorialSaveDTO;
 import com.sopra.spring.jpa.h2.dto.TutorialUpdateDTO;
-import org.springframework.validation.annotation.Validated;
 
-import javax.validation.constraints.NotNull;
 import java.util.Collection;
 
 public interface TutorialService {
@@ -14,9 +12,9 @@ public interface TutorialService {
 
     TutorialDTO getTutorialById(long id);
 
-    TutorialDTO createTutorial(@Validated @NotNull TutorialSaveDTO tutorialSaveDTO);
+    TutorialDTO createTutorial(TutorialSaveDTO tutorialSaveDTO);
 
-    TutorialDTO updateTutorial(long id, @Validated @NotNull TutorialUpdateDTO tutorialUpdateDTO);
+    TutorialDTO updateTutorial(long id, TutorialUpdateDTO tutorialUpdateDTO);
 
     void deleteById(long id);
 
