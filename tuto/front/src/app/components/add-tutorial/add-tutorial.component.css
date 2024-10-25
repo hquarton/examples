@@ -1,4 +1,8 @@
 .submit-form {
   max-width: 400px;
   margin: auto;
+  .form-control-description{
+    min-height: 600px;
+    width: 100%;
+  }
 }
