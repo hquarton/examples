@@ -11,6 +11,7 @@ import lombok.ToString;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Collection;
 
 @Getter
 @Setter
@@ -41,4 +42,6 @@ public class TutorialDTO implements Serializable {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime lastPublishedDate;
+
+    private Collection<HistoryDTO> histories;
 }

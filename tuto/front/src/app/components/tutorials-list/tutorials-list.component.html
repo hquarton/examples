@@ -76,10 +76,17 @@
         Edit
       </a>
     </div>
-
     <div *ngIf="!currentTutorial">
       <br/>
       <p>Please click on a Tutorial...</p>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div *ngIf="currentTutorial.id">
+      <div>
+        <app-history-details [histories]="currentTutorial.histories"/>
+      </div>
     </div>
   </div>
 </div>

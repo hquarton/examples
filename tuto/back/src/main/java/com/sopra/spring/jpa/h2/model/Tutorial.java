@@ -12,25 +12,29 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Version;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Getter
 @Setter
 @Builder
 @ToString
-@EqualsAndHashCode
+@EqualsAndHashCode(exclude = "histories")
 @NoArgsConstructor
 @AllArgsConstructor
 @EntityListeners({AuditingEntityListener.class, AuditTutorialListener.class})
@@ -38,7 +42,8 @@ import java.time.LocalDateTime;
 public class Tutorial implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private long id;
 
     @Column(name = "title")
@@ -48,7 +53,7 @@ public class Tutorial implements Serializable {
     private String description;
 
     @Column(name = "published")
-    private boolean published;
+    private Boolean published;
 
     @Column(name = "operation")
     private String operation;
@@ -67,6 +72,9 @@ public class Tutorial implements Serializable {
 
     @Column(name = "published_date")
     private LocalDateTime lastPublishedDate;
+
+    @OneToMany(mappedBy = "tutorial", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<History> histories;
 
     public Tutorial(String title, String description, boolean published) {
         this.title = title;

@@ -7,7 +7,10 @@ import org.mapstruct.ReportingPolicy;
 
 import java.util.Collection;
 
-@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.ERROR)
+@Mapper(componentModel = "spring",
+        unmappedTargetPolicy = ReportingPolicy.ERROR,
+        uses = {HistoryMapper.class}
+)
 public interface TutorialMapper {
 
     TutorialDTO tutorialToTutorialDto(Tutorial tutorialDTO);

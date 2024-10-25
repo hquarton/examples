@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Tutorial } from 'src/app/models/tutorial.model';
+import {History, Tutorial} from 'src/app/models/tutorial.model';
 import { TutorialService } from 'src/app/services/tutorial.service';
 
 @Component({
@@ -70,4 +70,7 @@ export class TutorialsListComponent implements OnInit {
         });
   }
 
+  getHistories() : History[] {
+    return this.currentTutorial?.histories?.length==0? this.currentTutorial.histories:[];
+  }
 }
