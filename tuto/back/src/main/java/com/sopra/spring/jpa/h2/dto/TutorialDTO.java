@@ -1,5 +1,6 @@
 package com.sopra.spring.jpa.h2.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -9,6 +10,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -26,4 +28,11 @@ public class TutorialDTO implements Serializable {
     private String description;
 
     private boolean published;
+
+    private String operation;
+
+    private int version;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    private LocalDateTime lastPublishedDate;
 }

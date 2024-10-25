@@ -13,8 +13,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.persistence.Version;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -40,9 +44,36 @@ public class Tutorial implements Serializable {
     @Column(name = "published")
     private boolean published;
 
+    @Column(name = "operation")
+    private String operation;
+
+    @Version
+    @Column(name = "version")
+    private int version;
+
+    @Column(name = "published_date")
+    private LocalDateTime lastPublishedDate;
+
     public Tutorial(String title, String description, boolean published) {
         this.title = title;
         this.description = description;
         this.published = published;
+    }
+
+    @PrePersist
+    public void onPrePersist() {
+        this.setOperation("INSERT");
+    }
+
+    @PreUpdate
+    public void onPreUpdate() {
+        this.setOperation("UPDATE");
+        this.updateLastPublishedDate();
+    }
+
+    void updateLastPublishedDate() {
+        if (this.published) {
+            this.lastPublishedDate = LocalDateTime.now();
+        }
     }
 }
