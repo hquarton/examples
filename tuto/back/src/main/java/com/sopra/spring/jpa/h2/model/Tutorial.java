@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.Column;
@@ -31,7 +33,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
-@EntityListeners({AuditTutorialListener.class})
+@EntityListeners({AuditingEntityListener.class, AuditTutorialListener.class})
 @Table(name = "tutorials")
 public class Tutorial implements Serializable {
 
@@ -54,6 +56,14 @@ public class Tutorial implements Serializable {
     @Version
     @Column(name = "version")
     private int version;
+
+    @Column(name = "created_date", nullable = false, updatable = false)
+    @CreatedDate
+    private LocalDateTime createdDate;
+
+    @Column(name = "modified_date")
+    @LastModifiedDate
+    private LocalDateTime modifiedDate;
 
     @Column(name = "published_date")
     private LocalDateTime lastPublishedDate;

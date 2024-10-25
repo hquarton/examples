@@ -34,6 +34,14 @@
         <label><strong>Status:</strong></label>
         {{ currentTutorial.published ? "Published" : "Pending" }}
       </div>
+      <div class="form-group">
+        <label><strong>Création le :</strong></label>
+        {{ currentTutorial.createdDate }}
+      </div>
+      <div class="form-group">
+        <label><strong>Dernière modification le :</strong></label>
+        {{ currentTutorial.modifiedDate }}
+      </div>
       <div class="form-group" *ngIf="currentTutorial.lastPublishedDate">
         <label><strong>Dernière publication le :</strong></label>
         {{ currentTutorial.lastPublishedDate }}

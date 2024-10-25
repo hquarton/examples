@@ -60,6 +60,14 @@
         <label><strong>Status:</strong></label>
         {{ currentTutorial.published ? "Published" : "Pending" }}
       </div>
+      <div>
+        <label><strong>Création le:</strong></label>
+        {{ currentTutorial.createdDate}}
+      </div>
+      <div>
+        <label><strong>Dernière modification le:</strong></label>
+        {{ currentTutorial.modifiedDate}}
+      </div>
       <div *ngIf="currentTutorial.lastPublishedDate">
         <label><strong>Dernière publication le:</strong></label>
         {{ currentTutorial.lastPublishedDate }}
