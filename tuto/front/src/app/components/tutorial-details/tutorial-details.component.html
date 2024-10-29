@@ -16,16 +16,35 @@
         <label for="description">Description</label>
         <input
           type="text"
-          class="form-control"
+          class="form-control-description"
           id="description"
           [(ngModel)]="currentTutorial.description"
           name="description"
         />
       </div>
-
+      <div class="form-group">
+        <label><strong>Version n°</strong></label>
+        {{ currentTutorial.version }}
+      </div>
+      <div class="form-group">
+        <label><strong>Dernière operation:</strong></label>
+        {{ currentTutorial.operation }}
+      </div>
       <div class="form-group">
         <label><strong>Status:</strong></label>
         {{ currentTutorial.published ? "Published" : "Pending" }}
+      </div>
+      <div class="form-group">
+        <label><strong>Création le :</strong></label>
+        {{ currentTutorial.createdDate }}
+      </div>
+      <div class="form-group">
+        <label><strong>Dernière modification le :</strong></label>
+        {{ currentTutorial.modifiedDate }}
+      </div>
+      <div class="form-group" *ngIf="currentTutorial.lastPublishedDate">
+        <label><strong>Dernière publication le :</strong></label>
+        {{ currentTutorial.lastPublishedDate }}
       </div>
     </form>
 
@@ -59,7 +78,7 @@
   </div>
 
   <div *ngIf="!currentTutorial.id">
-    <br />
+    <br/>
     <p>Cannot access this Tutorial...</p>
   </div>
 </div>

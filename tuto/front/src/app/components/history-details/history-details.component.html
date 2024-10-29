@@ -1,0 +1,23 @@
+<div>
+  <h4>Historique <a class="collapse-button" (click)="this.toggleCollapse()">{{this.getSymboleCollapse()}}</a></h4>
+  <div [style.visibility]="this.getVisibility()">
+    <table>
+      <thead>
+      <tr>
+        <th>Attribut</th>
+        <th>Avant</th>
+        <th>Après</th>
+        <th>Date</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let history of this.getHistories()">
+        <td>{{ history.field }}</td>
+        <td>{{ this.getValueBefore(history) }}</td>
+        <td>{{ this.getValueAfter(history) }}</td>
+        <td>{{ this.getDateChange(history) }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

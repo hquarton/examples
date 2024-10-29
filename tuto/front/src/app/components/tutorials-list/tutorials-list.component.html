@@ -18,6 +18,7 @@
       </div>
     </div>
   </div>
+
   <div class="col-md-6">
     <h4>Tutorials List</h4>
     <ul class="list-group">
@@ -35,29 +36,57 @@
       Remove All
     </button>
   </div>
+
   <div class="col-md-6">
     <div *ngIf="currentTutorial.id">
-      <h4>Tutorial</h4>
+      <h4>Tutorial détails</h4>
       <div>
-        <label><strong>Title:</strong></label> {{ currentTutorial.title }}
+        <label><strong>Title:</strong></label>
+        {{ currentTutorial.title }}
       </div>
       <div>
         <label><strong>Description:</strong></label>
         {{ currentTutorial.description }}
       </div>
       <div>
+        <label><strong>Version n°</strong></label>
+        {{ currentTutorial.version }}
+      </div>
+      <div>
+        <label><strong>Dernière operation:</strong></label>
+        {{ currentTutorial.operation }}
+      </div>
+      <div>
         <label><strong>Status:</strong></label>
         {{ currentTutorial.published ? "Published" : "Pending" }}
       </div>
-
+      <div>
+        <label><strong>Création le:</strong></label>
+        {{ currentTutorial.createdDate}}
+      </div>
+      <div>
+        <label><strong>Dernière modification le:</strong></label>
+        {{ currentTutorial.modifiedDate}}
+      </div>
+      <div *ngIf="currentTutorial.lastPublishedDate">
+        <label><strong>Dernière publication le:</strong></label>
+        {{ currentTutorial.lastPublishedDate }}
+      </div>
       <a class="badge badge-warning" routerLink="/tutorials/{{ currentTutorial.id }}">
         Edit
       </a>
     </div>
-
     <div *ngIf="!currentTutorial">
-      <br />
+      <br/>
       <p>Please click on a Tutorial...</p>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div *ngIf="currentTutorial.id">
+      <div>
+        <app-history-details [histories]="currentTutorial.histories"/>
+      </div>
     </div>
   </div>
 </div>

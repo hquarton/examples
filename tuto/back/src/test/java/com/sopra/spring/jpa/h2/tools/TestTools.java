@@ -21,7 +21,7 @@ public final class TestTools {
     }
 
     public static Set<Tutorial> getTutorialDTOsFilterIsPublished() {
-        return TestTools.getTutorialDTOs().stream().filter(Tutorial::isPublished).collect(Collectors.toSet());
+        return TestTools.getTutorialDTOs().stream().filter(Tutorial::getPublished).collect(Collectors.toSet());
     }
 
 
@@ -63,7 +63,7 @@ public final class TestTools {
         assertEquals(expected.getId(), result.getId());
         assertEquals(expected.getTitle(), result.getTitle());
         assertEquals(expected.getDescription(), result.getDescription());
-        assertEquals(expected.isPublished(), result.isPublished());
+        assertEquals(expected.getPublished(), result.isPublished());
     }
 
     public static void assertEqualsTutorialDto(TutorialDTO expected, TutorialDTO result) {

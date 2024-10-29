@@ -1,4 +1,8 @@
 .edit-form {
   max-width: 400px;
   margin: auto;
+  .form-control-description{
+    min-height: 200px;
+    width: 100%;
+  }
 }
